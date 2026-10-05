@@ -1,0 +1,6 @@
+{
+  "name": "Organizador de Lista de Compras Inteligente",
+  "description": "Organize listas de supermercado desestruturadas agrupadas por setores com trajeto otimizado e envio para WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

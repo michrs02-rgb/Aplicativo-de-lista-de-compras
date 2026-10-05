@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Make window.fetch writable so browser extensions can attach hooks without throwing
+      try {
+        let currentFetch = window.fetch.bind(window);
+        Object.defineProperty(window, 'fetch', {
+          configurable: true,
+          enumerable: true,
+          get() {
+            return currentFetch;
+          },
+          set(newFetch) {
+            currentFetch = newFetch;
+          },
+        });
+      } catch (err) {
+        // Fallback silently if environment prevents property redefinition
+      }
+
+      // Ignore uncaught errors originating from browser extensions
+      window.addEventListener('error', function(event) {
+        if (event.filename && (event.filename.startsWith('chrome-extension://') || event.filename.startsWith('moz-extension://'))) {
+          event.stopImmediatePropagation();
+          event.preventDefault();
+        }
+      }, true);
+    </script>
+    <title>Organizador de Lista de Compras Inteligente por Setores</title>
+    <meta name="description" content="Organize listas de supermercado desestruturadas agrupadas por setores com trajeto otimizado e envio para WhatsApp." />
+    <meta property="og:title" content="Organizador de Lista de Compras Inteligente por Setores" />
+    <meta property="og:description" content="Organize listas de supermercado desestruturadas agrupadas por setores com trajeto otimizado e envio para WhatsApp." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
